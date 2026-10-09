@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TrendKart - Smart Motion Sensor LED Light</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
+          colors: {
+            brand: {
+              dark: '#09090b',
+              card: '#121216',
+              amber: '#f59e0b',
+              glow: '#fbbf24'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .glow-active {
+      box-shadow: 0 0 70px 25px rgba(251, 191, 36, 0.45), inset 0 0 25px rgba(251, 191, 36, 0.6);
+      background: radial-gradient(circle, #fffbeb 15%, #fef3c7 50%, #fde68a 100%) !important;
+    }
+    .led-dot-active {
+      background-color: #fbbf24 !important;
+      box-shadow: 0 0 10px #f59e0b, 0 0 20px #fbbf24;
+    }
+    .glass-card {
+      background: rgba(18, 18, 22, 0.7);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+  </style>
+</head>
+<body class="bg-[#09090b] text-zinc-100 font-sans antialiased selection:bg-amber-500 selection:text-black pb-28">
+
+  <!-- Header -->
+  <header class="border-b border-white/5 bg-zinc-950/80 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="w-3 h-3 rounded-full bg-amber-400 animate-pulse"></span>
+        <span class="font-extrabold text-xl tracking-tight text-white">Trend<span class="text-amber-400">Kart</span></span>
+      </div>
+      <a href="#order" class="text-xs uppercase tracking-wider font-semibold px-4 py-2 rounded-full bg-amber-400/10 text-amber-300 border border-amber-400/30 hover:bg-amber-400 hover:text-black transition">
+        Order Now
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="max-w-6xl mx-auto px-4 pt-12 pb-16">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/20 text-amber-300 text-xs font-medium mb-5">
+          ✨ 100% Cordless • Rechargeable Motion Sensor
+        </div>
+        <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-tight mb-6">
+          A little light. <br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-yellow-500">A lot of comfort.</span>
+        </h1>
+        <p class="text-zinc-400 text-base sm:text-lg mb-8 leading-relaxed max-w-lg">
+          The smart stick-on light with auto-sensing technology. Pure white minimal aesthetic, zero wiring, and warm eye-care illumination.
+        </p>
+        <div class="flex flex-wrap gap-4 items-center">
+          <a href="#order" class="px-7 py-3.5 rounded-full bg-amber-400 text-zinc-950 font-bold hover:bg-amber-300 transition shadow-lg shadow-amber-400/20">
+            Bring home the glow →
+          </a>
+          <div class="text-left">
+            <span class="text-2xl font-bold text-white">₹499</span>
+            <span class="text-zinc-500 line-through text-sm ml-1.5">₹999</span>
+            <span class="text-xs text-amber-400 font-semibold block">Set of 2 Lights</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Puck Light Display -->
+      <div class="flex flex-col items-center justify-center p-8 glass-card rounded-3xl relative overflow-hidden">
+        <span class="text-xs font-medium tracking-widest uppercase text-zinc-500 mb-6">Tap the puck light to toggle glow</span>
+        
+        <!-- White Circular Puck Light -->
+        <div id="puckLight" onclick="toggleGlow()" class="cursor-pointer relative w-64 h-64 rounded-full bg-[#f8fafc] border-4 border-[#e2e8f0] shadow-2xl flex items-center justify-center transition-all duration-500 select-none glow-active">
+          <!-- 6 LED Dots Array -->
+          <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <span class="absolute w-3 h-3 rounded-full bg-amber-300 led-dot-active -translate-y-16 transition-all duration-300"></span>
+            <span class="absolute w-3 h-3 rounded-full bg-amber-300 led-dot-active translate-x-14 -translate-y-8 transition-all duration-300"></span>
+            <span class="absolute w-3 h-3 rounded-full bg-amber-300 led-dot-active translate-x-14 translate-y-8 transition-all duration-300"></span>
+            <span class="absolute w-3 h-3 rounded-full bg-amber-300 led-dot-active translate-y-16 transition-all duration-300"></span>
+            <span class="absolute w-3 h-3 rounded-full bg-amber-300 led-dot-active -translate-x-14 translate-y-8 transition-all duration-300"></span>
+            <span class="absolute w-3 h-3 rounded-full bg-amber-300 led-dot-active -translate-x-14 -translate-y-8 transition-all duration-300"></span>
+          </div>
+          <!-- Center PIR Sensor Dome -->
+          <div class="w-11 h-11 rounded-full bg-white/90 border border-zinc-300 shadow-inner flex items-center justify-center z-10">
+            <div class="w-7 h-7 rounded-full bg-zinc-100 shadow-sm"></div>
+          </div>
+        </div>
+
+        <div class="mt-6 flex items-center gap-2 text-xs text-zinc-400">
+          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+          <span>Automatic PIR Motion Sensor (120° Angle)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3-Step Setup -->
+  <section class="max-w-6xl mx-auto px-4 py-16 border-t border-white/5">
+    <div class="text-center mb-12">
+      <span class="text-xs font-semibold tracking-widest text-amber-400 uppercase">Less Setup • More Comfort</span>
+      <h2 class="text-3xl font-extrabold mt-2">Peel. Stick. Glow.</h2>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="glass-card p-6 rounded-2xl">
+        <div class="w-10 h-10 rounded-full bg-amber-400/10 text-amber-300 flex items-center justify-center font-bold mb-4">1</div>
+        <h3 class="font-bold text-lg mb-2">Peel the Backing</h3>
+        <p class="text-zinc-400 text-sm">Remove the protective seal from the strong 3M adhesive disc.</p>
+      </div>
+      <div class="glass-card p-6 rounded-2xl">
+        <div class="w-10 h-10 rounded-full bg-amber-400/10 text-amber-300 flex items-center justify-center font-bold mb-4">2</div>
+        <h3 class="font-bold text-lg mb-2">Stick the Base</h3>
+        <p class="text-zinc-400 text-sm">Mount the magnetic base disc to any wall, wood, tile, or cabinet.</p>
+      </div>
+      <div class="glass-card p-6 rounded-2xl">
+        <div class="w-10 h-10 rounded-full bg-amber-400/10 text-amber-300 flex items-center justify-center font-bold mb-4">3</div>
+        <h3 class="font-bold text-lg mb-2">Snap On & Enjoy</h3>
+        <p class="text-zinc-400 text-sm">Snap the light magnetically. Detach anytime for USB charging.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- In The Box -->
+  <section class="max-w-4xl mx-auto px-4 py-12">
+    <div class="glass-card p-8 rounded-3xl border border-white/10">
+      <h3 class="text-xl font-bold text-white mb-6">What's Inside Every Pack</h3>
+      <div class="grid sm:grid-cols-2 gap-4 text-sm text-zinc-300">
+        <div class="flex items-center gap-3">
+          <span class="text-amber-400">✓</span> Pure White 6-LED Motion Puck Light
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="text-amber-400">✓</span> 3M Adhesive Magnetic Base Plate
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="text-amber-400">✓</span> Fast USB Charging Cable
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="text-amber-400">✓</span> Quick Start Manual & Warranty
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Checkout & Quantity -->
+  <section id="order" class="max-w-4xl mx-auto px-4 py-16">
+    <div class="glass-card p-8 rounded-3xl border border-amber-400/30">
+      <div class="text-center mb-8">
+        <span class="text-xs font-semibold tracking-widest text-amber-400 uppercase">Make Room For A Little Glow</span>
+        <h2 class="text-3xl font-extrabold mt-2">Select Your Bundle</h2>
+      </div>
+
+      <!-- Presets -->
+      <div class="grid grid-cols-3 gap-4 mb-8">
+        <button onclick="setPack(2, 499)" id="btn2" class="p-4 rounded-xl border border-amber-400 bg-amber-400/10 text-center transition">
+          <span class="block text-xs text-amber-300 uppercase font-semibold">Starter</span>
+          <span class="text-lg font-bold">2 Lights</span>
+          <span class="block text-sm text-zinc-300 mt-1">₹499</span>
+        </button>
+        <button onclick="setPack(3, 699)" id="btn3" class="p-4 rounded-xl border border-white/10 hover:border-amber-400/50 text-center transition">
+          <span class="block text-xs text-zinc-400 uppercase font-semibold">Popular</span>
+          <span class="text-lg font-bold">3 Lights</span>
+          <span class="block text-sm text-zinc-300 mt-1">₹699</span>
+        </button>
+        <button onclick="setPack(4, 899)" id="btn4" class="p-4 rounded-xl border border-white/10 hover:border-amber-400/50 text-center transition">
+          <span class="block text-xs text-emerald-400 uppercase font-semibold">Best Value</span>
+          <span class="text-lg font-bold">4 Lights</span>
+          <span class="block text-sm text-zinc-300 mt-1">₹899</span>
+        </button>
+      </div>
+
+      <!-- Counter -->
+      <div class="flex items-center justify-between p-4 bg-zinc-900/90 rounded-2xl border border-white/5 mb-8">
+        <span class="text-sm font-semibold">Number of Lights:</span>
+        <div class="flex items-center gap-4">
+          <button onclick="updateQty(-1)" class="w-9 h-9 rounded-lg bg-zinc-800 text-white font-bold hover:bg-zinc-700 transition">-</button>
+          <span id="qtyDisplay" class="font-extrabold text-lg w-6 text-center">2</span>
+          <button onclick="updateQty(1)" class="w-9 h-9 rounded-lg bg-zinc-800 text-white font-bold hover:bg-zinc-700 transition">+</button>
+        </div>
+      </div>
+
+      <!-- Summary & Order CTA -->
+      <div class="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div>
+          <span class="text-xs text-zinc-400 block">Total Amount (Cash on Delivery):</span>
+          <span id="totalPrice" class="text-3xl font-extrabold text-amber-400">₹499</span>
+        </div>
+        <button onclick="orderViaWhatsApp()" class="w-full sm:w-auto px-8 py-4 rounded-full bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-extrabold text-base flex items-center justify-center gap-3 transition shadow-lg shadow-emerald-500/20">
+          <span>Order via WhatsApp (COD)</span>
+        </button>
+      </div>
+
+      <!-- Trust Badges -->
+      <div class="grid grid-cols-3 gap-2 mt-8 pt-6 border-t border-white/5 text-center text-xs text-zinc-400">
+        <div>🚚 Cash on Delivery</div>
+        <div>⚡ 2-4 Days Shipping</div>
+        <div>🔄 7 Days Replacement</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Bottom Checkout for Mobile -->
+  <div class="fixed bottom-0 left-0 right-0 p-3 bg-zinc-950/90 backdrop-blur border-t border-white/10 sm:hidden z-50 flex items-center justify-between">
+    <div>
+      <span class="text-xs text-zinc-400 block">Total (COD):</span>
+      <span id="stickyPrice" class="text-xl font-bold text-amber-400">₹499</span>
+    </div>
+    <button onclick="orderViaWhatsApp()" class="px-5 py-2.5 rounded-full bg-emerald-500 text-zinc-950 font-bold text-sm">
+      Order Now →
+    </button>
+  </div>
+
+  <script>
+    let quantity = 2;
+    let price = 499;
+    let isGlowing = true;
+
+    function toggleGlow() {
+      const puck = document.getElementById('puckLight');
+      const dots = puck.querySelectorAll('.led-dot-active, .bg-amber-300');
+      isGlowing = !isGlowing;
+
+      if(isGlowing) {
+        puck.classList.add('glow-active');
+        dots.forEach(d => {
+          d.classList.add('led-dot-active');
+          d.classList.remove('bg-zinc-300');
+        });
+      } else {
+        puck.classList.remove('glow-active');
+        dots.forEach(d => {
+          d.classList.remove('led-dot-active');
+          d.classList.add('bg-zinc-300');
+        });
+      }
+    }
+
+    function calculatePrice(qty) {
+      if (qty === 2) return 499;
+      if (qty === 3) return 699;
+      if (qty === 4) return 899;
+      return 899 + ((qty - 4) * 200);
+    }
+
+    function renderUI() {
+      document.getElementById('qtyDisplay').innerText = quantity;
+      document.getElementById('totalPrice').innerText = '₹' + price;
+      document.getElementById('stickyPrice').innerText = '₹' + price;
+
+      ['btn2', 'btn3', 'btn4'].forEach(id => {
+        const btn = document.getElementById(id);
+        btn.classList.remove('border-amber-400', 'bg-amber-400/10');
+        btn.classList.add('border-white/10');
+      });
+
+      if (quantity === 2) {
+        document.getElementById('btn2').classList.add('border-amber-400', 'bg-amber-400/10');
+      } else if (quantity === 3) {
+        document.getElementById('btn3').classList.add('border-amber-400', 'bg-amber-400/10');
+      } else if (quantity === 4) {
+        document.getElementById('btn4').classList.add('border-amber-400', 'bg-amber-400/10');
+      }
+    }
+
+    function setPack(qty, cost) {
+      quantity = qty;
+      price = cost;
+      renderUI();
+    }
+
+    function updateQty(change) {
+      let next = quantity + change;
+      if (next >= 2 && next <= 10) {
+        quantity = next;
+        price = calculatePrice(quantity);
+        renderUI();
+      }
+    }
+
+    function orderViaWhatsApp() {
+      const msg = encodeURIComponent(
+        `Hi TrendKart, I want to order ${quantity} Motion Sensor LED Lights for Rs.${price}.\n\n` +
+        `Delivery Details:\n` +
+        `1. Name:\n` +
+        `2. House/Address:\n` +
+        `3. City & Pincode:\n` +
+        `4. Phone:\n\n` +
+        `Payment Method: Cash on Delivery (COD)`
+      );
+      window.open(`https://wa.me/919633442578?text=${msg}`, '_blank');
+    }
+  </script>
+</body>
+</html>
